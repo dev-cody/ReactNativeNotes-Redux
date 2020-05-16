@@ -36,9 +36,24 @@ function ViewNotes({ navigation }) {
                     <List.Item 
                         title={item.note.title}
                         description={item.note.noteContent}
-                        descriptionNumberOfLines={1}
                         titleStyle={styles.listTitle}
-                        onPress = {()=> navigation.navigate('ReadNotes')}
+                        onPress = {() => {
+                            Alert.alert(
+                                'delete note?',
+                                'are you sure you would like to delete this note ' + item.note.title + '?',
+                                [
+                                    {
+                                        text: 'Cancel',
+                                        onPress: () => console.log(item.note.title + ' not deleted'),
+                                        style: 'cancel'
+                                    },
+                                    {
+                                        text: 'yes, delete me',
+                                        onPress: () => deleteNote(item.id)
+                                    }
+                                ]
+                            )
+                        }}
                     /> 
                     )}
                     keyExtractor={item => item.id.toString()}
